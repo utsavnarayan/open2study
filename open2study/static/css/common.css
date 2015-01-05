@@ -3,9 +3,12 @@ table th
 font-weight:bold;
 font-size:20px;
 border-bottom: solid 1px #CCC;
+text-align:left;
+padding-right:20px;
 }
 table tr td
 {
 padding: 5px 10px 5px 10px;
 font-size:12px;
+border: solid 1px #EEE;
 }

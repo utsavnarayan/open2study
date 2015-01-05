@@ -5,6 +5,7 @@ from django.db import models
 
 class Course(models.Model):
     url = models.URLField()
+    short_url = models.TextField()
     name = models.TextField()
 
     def __unicode__(self):

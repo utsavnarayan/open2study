@@ -12,5 +12,5 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^index/', views.index),
-    url(r'^course/(?P<course_name>((\w+)(-(\w+))*))', views.course),
+    url(r'^courses/(?P<course_name>((\w+)(-(\w+))*))', views.course),
 )

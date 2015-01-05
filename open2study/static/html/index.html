@@ -17,8 +17,8 @@
     {% for course in courses %}
         <tr>
             <td>{{ course.name }}</td>
-            <td>http://localhost:8000/{{ course.short_url }}</td>
-            <td>{{ course.url}}</td>
+            <td><a href="{{ course.short_url }}">details link</a></td>
+            <td><a href="{{ course.url }}">official link</a></td>
         </tr>
     {% endfor %}
 </table>
