@@ -13,6 +13,7 @@ class Course(models.Model):
 
 class CourseDetails(models.Model):
     course = models.ForeignKey(Course)
+    short_url = models.TextField()
     instructor = models.TextField()
     summary = models.TextField()
     full_summary = models.TextField()

@@ -7,8 +7,8 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 class CourseDetailsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'instructor', 'summary')
+    list_display = ('course', 'instructor', 'summary')
 
 
-admin.site.register(Course)
-admin.site.register(CourseDetails)
+admin.site.register(Course, CourseAdmin)
+admin.site.register(CourseDetails, CourseDetailsAdmin)
