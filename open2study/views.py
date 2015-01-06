@@ -1,8 +1,25 @@
 __author__ = 'utsav'
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from crawlers.models import Course, CourseDetails
-from django.template import loader, Context, RequestContext
+from django.template import loader,  RequestContext
+from django.http import Http404
+
+
+def _show_error(request, error_code):
+    template = loader.get_template("error.html")
+    context = RequestContext(request, {
+        'error_code': error_code,
+    })
+    return HttpResponse(template.render(context))
+
+
+def show_error_404(request):
+    return _show_error(request, 404)
+
+
+def show_error_500(request):
+    return _show_error(request, 500)
 
 
 def index(request):
@@ -19,15 +36,10 @@ def course(request, course_name):
     try:
         course_details = CourseDetails.objects.get(short_url=course_url)
     except CourseDetails.DoesNotExist:
-        return show_404()
+        raise Http404
 
     template = loader.get_template('course_details.html')
     context = RequestContext(request, {
         'course_details': course_details,
     })
     return HttpResponse(template.render(context))
-
-
-def show_404():
-    template = loader.get_template("404.html")
-    return HttpResponse(template.render(Context()))

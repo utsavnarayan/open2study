@@ -11,6 +11,9 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^index/', views.index),
+    url(r'^$', views.index),
     url(r'^courses/(?P<course_name>((\w+)(-(\w+))*))', views.course),
 )
+
+handler404 = views.show_error_404
+handler500 = views.show_error_500
