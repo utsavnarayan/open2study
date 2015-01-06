@@ -62,4 +62,5 @@ TEMPLATE_DIRS = (
 
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static/css'),
+    os.path.join(os.path.dirname(__file__), 'static/js'),
 )

@@ -10,6 +10,10 @@
     <div id="header">
         <span id="header-text">List of crawled urls:</span>
     </div>
+    <br/>
+    <input type="text" class="text-input" value="Enter url(s)" name="mybtn" class="goto-button" id="url-list"/>
+    <button type="button" value="" name="crawl" class="button" id="crawl-btn">Crawl url(s)</button>
+    <button type="button" value="" name="decrawl" class="button" id="delete-btn">Delete all data</button>
     <table>
         <tr>
             <th>Course</th>
@@ -23,6 +27,8 @@
             <td><a href="{{ course.url }}">official link</a></td>
         </tr>
     {% endfor %}
-</table>
+    </table>
+    <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'index.js' %}"></script>
 </body>
 </html>

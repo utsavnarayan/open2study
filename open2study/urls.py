@@ -13,6 +13,8 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     url(r'^$', views.index),
     url(r'^courses/(?P<course_name>((\w+)(-(\w+))*))', views.course),
+    url(r'^crawl/', views.crawl_urls),
+    url(r'^delete/', views.delete_all_courses),
 )
 
 handler404 = views.show_error_404

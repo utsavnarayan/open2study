@@ -27,4 +27,11 @@ table tr td {
 }
 #header-text { font-size: 24px }
 #course-details { padding: 10px }
+.goto-button {
+    text-decoration: none;
+    background:  #77618a;
+    padding: 8px 15px;
+    color: #FFF;
+}
+.text-input { width:200px }
 

@@ -1,9 +1,12 @@
 __author__ = 'utsav'
 
-from django.http import HttpResponse, Http404
-from crawlers.models import Course, CourseDetails
+from django.http import HttpResponse
 from django.template import loader,  RequestContext
 from django.http import Http404
+
+from crawlers.models import Course, CourseDetails
+from crawlers import crawl_courses, InvalidUrlException
+import json
 
 
 def _show_error(request, error_code):
@@ -45,3 +48,21 @@ def course(request, course_name):
         'course_details': course_details,
     })
     return HttpResponse(template.render(context))
+
+
+def crawl_urls(request):
+    urls = request.REQUEST['urls']
+    try:
+        crawl_courses(urls)
+        message = "Successfully crawled."
+    except InvalidUrlException:
+        message = "Crawl failed due to incorrect url."
+    payload = {'message': message}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
+
+
+def delete_all_courses(request):
+    Course.objects.all().delete()
+    CourseDetails.objects.all().delete()
+    payload = {'message': "All courses successfully deleted."}
+    return HttpResponse(json.dumps(payload), content_type='application/json')
