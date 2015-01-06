@@ -1,0 +1,1 @@
+web: gunicorn open2study.wsgi --log-file -
