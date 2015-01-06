@@ -1,5 +1,5 @@
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = '9*vxwa9!*noptv-8pvqty4i5$z09it@c65+tm-#!cyk%l@n09d'
 
@@ -64,7 +64,8 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static/html'),
 )
 
+# Static asset configuration for Heroku
 STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'static/css'),
-    os.path.join(os.path.dirname(__file__), 'static/js'),
+    os.path.join(BASE_DIR, 'static/css'),
+    os.path.join(BASE_DIR, 'static/js'),
 )
