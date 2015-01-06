@@ -3,13 +3,13 @@ from django.contrib import admin
 import views
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'open2study.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
 )
 
+
+# Views for user:
+# homepage or localhost:port will show a list of all crawled urls
+# homepage/course/course-name will show details of a specific course
 urlpatterns += patterns('',
     url(r'^$', views.index),
     url(r'^courses/(?P<course_name>((\w+)(-(\w+))*))', views.course),

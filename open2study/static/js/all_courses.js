@@ -1,3 +1,5 @@
+// Not being used for now. Implement angular views in next iteration.
+
 var allCourses = [
     {
         title: 'a',

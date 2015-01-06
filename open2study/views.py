@@ -22,6 +22,7 @@ def show_error_500(request):
     return _show_error(request, 500)
 
 
+# Shows list of all crawled urls
 def index(request):
     courses = Course.objects.all()
     template = loader.get_template('index.html')
@@ -31,6 +32,7 @@ def index(request):
     return HttpResponse(template.render(context))
 
 
+# Shows details of a course
 def course(request, course_name):
     course_url = '/courses/' + course_name
     try:
