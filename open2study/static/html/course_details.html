@@ -3,8 +3,44 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>{{ course_details.course.name }}</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'common.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Helvetica, Arial;
+            font-size: 14px;
+        }
+        table { margin-top: 10px }
+        table tr th {
+            font-size: 14px;
+            border-bottom: solid 1px #CCC;
+            text-align: left;
+            padding-right: 20px;
+            background: #EEE;
+            padding: 5px;
+            min-width: 150px;
+        }
+        table tr td {
+            padding: 5px 10px 5px 10px;
+            font-size: 12px;
+            border: solid 1px #EEE;
+        }
+        #header {
+            display: block;
+            background: #77618a;
+            padding: 15px 10px;
+            border-bottom: solid 1px #AAA;
+            color: #FAFAFA;
+        }
+        #header-text { font-size: 24px }
+        #course-details { padding: 10px }
+        .goto-button {
+            text-decoration: none;
+            background:  #77618a;
+            padding: 8px 15px;
+            color: #FFF;
+        }
+        .text-input { width:200px }
+    </style>
 </head>
 <body>
     <div id="header">

@@ -3,8 +3,46 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>All crawled courses</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'common.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Helvetica, Arial;
+            font-size: 14px;
+        }
+        table { margin-top: 10px }
+        table tr th {
+            font-size: 14px;
+            border-bottom: solid 1px #CCC;
+            text-align: left;
+            padding-right: 20px;
+            background: #EEE;
+            padding: 5px;
+            min-width: 150px;
+        }
+        table tr td {
+            padding: 5px 10px 5px 10px;
+            font-size: 12px;
+            border: solid 1px #EEE;
+        }
+        #header {
+            display: block;
+            background: #77618a;
+            padding: 15px 10px;
+            border-bottom: solid 1px #AAA;
+            color: #FAFAFA;
+        }
+        #header-text { font-size: 24px }
+        #course-details { padding: 10px }
+        .goto-button {
+            text-decoration: none;
+            background:  #77618a;
+            padding: 8px 15px;
+            color: #FFF;
+        }
+        .text-input { width:200px }
+
+
+    </style>
 </head>
 <body>
     <div id="header">
@@ -28,7 +66,72 @@
         </tr>
     {% endfor %}
     </table>
-    <script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'index.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+
+        $(document).ready(function() {
+            var csrftoken = getCookie('csrftoken');
+            $("#crawl-btn").click(function() {
+                var urls = $("#url-list").val();
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "crawl/",
+                    data: { urls:urls },
+                    success: function(response){
+                        alert(response.message);
+                        window.location = window.location;
+                    }
+                });
+                return false;
+            });
+            $("#delete-btn").click(function() {
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "delete/",
+                    data: {},
+                    success: function(response){
+                        alert(response.message);
+                        window.location = window.location;
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>
