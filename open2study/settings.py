@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '9*vxwa9!*noptv-8pvqty4i5$z09it@c65+tm-#!cyk%l@n09d'
 
 # If DEBUG is set to False then apache/nginx should serve the static files
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
