@@ -18,6 +18,10 @@ class InvalidUrlException(Exception):
     pass
 
 
+class AlreadyCrawledUrl(Exception):
+    pass
+
+
 def _fetch_all_course_urls():
     course_urls = []
     soup = BeautifulSoup(urllib2.urlopen(_COURSES_URL))
@@ -35,6 +39,11 @@ def _fetch_course_info(course_url):
     """
     if _BASE_URL not in course_url:
         raise InvalidUrlException
+
+    crawled_urls = [x.url for x in Course.objects.all()]
+    if course_url in crawled_urls:
+        raise AlreadyCrawledUrl
+
     soup = BeautifulSoup(urllib2.urlopen(course_url))
     return CourseInfo(short_url=soup.find('article')['about'],
                       name=soup.find('h1').get_text(),
