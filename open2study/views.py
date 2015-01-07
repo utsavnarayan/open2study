@@ -5,7 +5,7 @@ from django.template import loader,  RequestContext
 from django.http import Http404
 
 from crawlers.models import Course, CourseDetails
-from crawlers import crawl_courses, InvalidUrlException
+from crawlers import crawl_courses, InvalidUrlException, AlreadyCrawledUrl
 import json
 
 
@@ -57,6 +57,8 @@ def crawl_urls(request):
         message = "Successfully crawled."
     except InvalidUrlException:
         message = "Crawl failed due to incorrect url."
+    except AlreadyCrawledUrl:
+        message = "Crawl failed because the url is already crawled."
     payload = {'message': message}
     return HttpResponse(json.dumps(payload), content_type='application/json')
 
